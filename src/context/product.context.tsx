@@ -1,5 +1,6 @@
-import { PropsWithChildren, createContext, useState } from "react";
+import { PropsWithChildren, createContext, useEffect, useState } from "react";
 import { ProductContextDataProps, ProductDetailsProps } from "../types/interfaces";
+import axios from "axios";
 
 export const ProductContext = createContext({} as ProductContextDataProps);
 
@@ -69,6 +70,38 @@ export const ProductContextProvider = ({ children }: PropsWithChildren) => {
 
     return productDetails;
   };
+
+  async function fetchData() {
+    // Defina o endpoint GraphQL
+    const GRAPHQL_ENDPOINT = 'http://localhost:4000/graphql'; // Substitua PORT pela porta do seu servidor GraphQL
+
+    // Defina a consulta GraphQL
+    const query = `
+  query {
+    products {
+      id
+      name
+      price
+      description
+    }
+  }
+`;
+
+    // Envie a solicitação POST para o endpoint GraphQL
+    axios.post(GRAPHQL_ENDPOINT, {
+      query
+    })
+      .then(response => {
+        console.log('Resposta da API GraphQL:', response.data);
+      })
+      .catch(error => {
+        console.error('Erro ao fazer a solicitação GraphQL:', error);
+      });
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const ProductContextData: ProductContextDataProps = {
     products,
