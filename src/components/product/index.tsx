@@ -1,20 +1,30 @@
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { Description } from "../description";
 import { ImageProduct } from "../imageProduct";
 import { Title } from "../title";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../types/navigation";
+import { ProductDetailsProps } from "../../types/interfaces";
 
 import { styles } from "./style";
 
-export const Product = () => {
+interface ProductProps {
+  navigation: StackNavigationProp<RootStackParamList, 'Home'>;
+  product: ProductDetailsProps
+}
+
+export const Product: React.FC<ProductProps> = ({ navigation, product }) => {
   return (
-    <View style={styles.container}>
-      <ImageProduct uri="https://cdn.pixabay.com/photo/2016/05/05/02/37/sunset-1373171_1280.jpg" />
+    <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('ProductDetails', { id: product.id })}>
+      <View style={styles.container}>
+        <ImageProduct uri={product.img} />
 
-      <View style={styles.content}>
-        <Title>EcoGlow: Luminária Solar Inteligente para Ambientes Externos</Title>
+        <View style={styles.content}>
+          <Title>{product.name}</Title>
 
-        <Description>Desfrute da iluminação ao ar livre de forma sustentável com a nossa EcoGlow, uma luminária solar inteligente projetada para ambientes externos.</Description>
+          <Description>{product.description}</Description>
+        </View>
       </View>
-    </View>
-  )
+    </TouchableOpacity>
+  );
 };
