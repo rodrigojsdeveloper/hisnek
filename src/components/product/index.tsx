@@ -1,21 +1,14 @@
 import { TouchableOpacity, View } from "react-native";
 import { ImageProduct } from "../imageProduct";
 import { Title } from "../title";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../../types/navigation";
-import { ProductDetailsProps } from "../../types/interfaces";
 import { Price } from "../price";
+import { ProductProps } from "../../types/interfaces";
 
 import { styles } from "./style";
 
-interface ProductProps {
-  navigation: StackNavigationProp<RootStackParamList, 'Home'>;
-  product: ProductDetailsProps
-}
-
 export const Product: React.FC<ProductProps> = ({ navigation, product }) => {
   return (
-    <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate('ProductDetails', { id: product.id })}>
+    <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ProductDetails", { id: product.id })}>
       <View style={styles.container}>
         <ImageProduct uri={product.img} />
 

@@ -1,14 +1,9 @@
-import React, { useContext } from 'react';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../types/navigation';
-import { FlatList, SafeAreaView, StyleSheet, View } from 'react-native';
-import { Product } from '../components/product';
-import { Header } from '../components/header';
-import { ProductContext } from '../context/product.context';
-
-interface HomeScreenProps {
-  navigation: StackNavigationProp<RootStackParamList, 'Home'>;
-}
+import React, { useContext } from "react";
+import { FlatList, SafeAreaView, StyleSheet, View } from "react-native";
+import { Product } from "../components/product";
+import { Header } from "../components/header";
+import { ProductContext } from "../context/product.context";
+import { HomeScreenProps } from "../types/interfaces";
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const { products } = useContext(ProductContext);
@@ -33,8 +28,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
-    backgroundColor: '#0E0F11',
-    color: '#fff',
+    backgroundColor: "#0E0F11",
+    color: "#fff",
   },
   container: {
     flex: 1,

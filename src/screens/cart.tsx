@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { ProductContext } from '../context/product.context';
-import { ProductInCart } from '../components/productInCart';
+import React, { useContext } from "react";
+import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { ProductContext } from "../context/product.context";
+import { ProductInCart } from "../components/productInCart";
 
 export const CartScreen = () => {
   const { productsInCart, subTotal, quantity } = useContext(ProductContext);
@@ -10,7 +10,7 @@ export const CartScreen = () => {
   const nav = useNavigation();
 
   const handleHome = () => {
-    nav.navigate('Home');
+    nav.navigate("Home");
   };
 
   return (
@@ -49,70 +49,70 @@ export const CartScreen = () => {
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
-    backgroundColor: '#0E0F11',
-    color: '#fff',
+    backgroundColor: "#0E0F11",
+    color: "#fff",
   },
   container: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    flexDirection: "column",
+    justifyContent: "space-between",
     paddingVertical: 25,
     paddingHorizontal: 15,
     gap: 30,
   },
   cartTitle: {
     fontSize: 20,
-    fontWeight: '600',
+    fontWeight: "600",
     lineHeight: 24,
-    color: '#fff',
-    textAlign: 'center',
+    color: "#fff",
+    textAlign: "center",
   },
   cart: {
     flex: 1,
-    backgroundColor: '#202224',
+    backgroundColor: "#202224",
     borderTopWidth: 1,
-    borderStyle: 'solid',
-    borderColor: '#fff',
+    borderStyle: "solid",
+    borderColor: "#fff",
   },
   emptyMessage: {
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: "500",
     lineHeight: 18,
-    textAlign: 'center',
-    color: '#FFF',
+    textAlign: "center",
+    color: "#FFF",
     padding: 15,
   },
   button: {
-    backgroundColor: '#202224',
+    backgroundColor: "#202224",
     padding: 10,
     borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
-    fontWeight: '600',
-    textTransform: 'uppercase',
+    fontWeight: "600",
+    textTransform: "uppercase",
   },
   viewQuantity: {
     padding: 10,
     gap: 10,
   },
   content: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   label: {
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: "600",
     lineHeight: 20,
-    color: '#FFF',
+    color: "#FFF",
   },
   value: {
     fontSize: 12,
-    fontWeight: '500',
+    fontWeight: "500",
     lineHeight: 16,
-    color: '#7C7C8A',
+    color: "#7C7C8A",
   },
 });

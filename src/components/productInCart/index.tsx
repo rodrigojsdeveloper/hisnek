@@ -1,14 +1,10 @@
 import { useContext } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { ProductDetailsProps } from "../../types/interfaces";
-import { Svg, Path } from 'react-native-svg';
+import { Svg, Path } from "react-native-svg";
+import { ProductInCartProps } from "../../types/interfaces";
 import { ProductContext } from "../../context/product.context";
 
-import { styles } from './style'
-
-interface ProductInCartProps {
-  product: ProductDetailsProps
-}
+import { styles } from "./style";
 
 export const ProductInCart = ({ product }: ProductInCartProps) => {
   const { handleRemoveProductInCart } = useContext(ProductContext);
@@ -35,5 +31,5 @@ export const ProductInCart = ({ product }: ProductInCartProps) => {
         <Text style={styles.value}>$ {product.price}</Text>
       </View>
     </View>
-  )
+  );
 };

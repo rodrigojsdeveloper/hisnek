@@ -1,10 +1,10 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
-import { HomeScreen } from './src/screens/home';
-import { ProductDetailsScreen } from './src/screens/productDetails';
-import { Providers } from './src/context';
-import { CartScreen } from './src/screens/cart';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator, TransitionPresets } from "@react-navigation/stack";
+import { HomeScreen } from "./src/screens/home";
+import { ProductDetailsScreen } from "./src/screens/productDetails";
+import { Providers } from "./src/context";
+import { CartScreen } from "./src/screens/cart";
 
 const Stack = createStackNavigator();
 
@@ -25,6 +25,6 @@ function App() {
       </NavigationContainer>
     </Providers>
   );
-}
+};
 
 export default App;

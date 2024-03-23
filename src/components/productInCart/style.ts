@@ -4,13 +4,13 @@ export const styles = StyleSheet.create({
   container: {
     gap: 10,
     borderBottomWidth: 1,
-    borderStyle: 'solid',
-    borderColor: '#fff',
+    borderStyle: "solid",
+    borderColor: "#fff",
     padding: 20,
   },
   content: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   image: {
     width: 70,
@@ -19,14 +19,14 @@ export const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
     lineHeight: 20,
-    color: '#FFF',
+    color: "#FFF",
   },
   value: {
     fontSize: 12,
-    fontWeight: '500',
+    fontWeight: "500",
     lineHeight: 16,
-    color: '#7C7C8A',
+    color: "#7C7C8A",
   },
 });

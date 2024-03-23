@@ -4,6 +4,6 @@ export const styles = StyleSheet.create({
   image: {
     height: 160,
     borderRadius: 10,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
 });

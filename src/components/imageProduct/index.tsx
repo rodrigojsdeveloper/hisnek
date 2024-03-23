@@ -1,10 +1,7 @@
 import { Image } from "react-native";
+import { ImageProductProps } from "../../types/interfaces";
 
-import { styles } from './style'
-
-interface ImageProductProps {
-  uri: string
-}
+import { styles } from "./style";
 
 export const ImageProduct = ({ uri }: ImageProductProps) => {
   return (
@@ -13,5 +10,5 @@ export const ImageProduct = ({ uri }: ImageProductProps) => {
       source={{ uri }}
       resizeMode="contain"
     />
-  )
+  );
 };

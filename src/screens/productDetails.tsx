@@ -1,18 +1,12 @@
-import React, { useContext } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
-import { RouteProp } from '@react-navigation/native';
-import { RootStackParamList } from '../types/navigation';
-import { ProductContext } from '../context/product.context';
-import { ProductDetailsProps } from '../types/interfaces';
-import { Header } from '../components/header';
-import { ImageProduct } from '../components/imageProduct';
-import { Title } from '../components/title';
-import { Description } from '../components/description';
-import { Price } from '../components/price';
-
-interface ProductDetailsScreenProps {
-  route: RouteProp<RootStackParamList, 'ProductDetails'>;
-}
+import React, { useContext } from "react";
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import { ProductContext } from "../context/product.context";
+import { ProductDetailsProps, ProductDetailsScreenProps } from "../types/interfaces";
+import { Header } from "../components/header";
+import { ImageProduct } from "../components/imageProduct";
+import { Title } from "../components/title";
+import { Description } from "../components/description";
+import { Price } from "../components/price";
 
 export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ route }) => {
   const { id } = route.params;
@@ -50,22 +44,22 @@ export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ rout
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
-    backgroundColor: '#0E0F11',
-    color: '#fff',
+    backgroundColor: "#0E0F11",
+    color: "#fff",
   },
   container: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    flexDirection: "column",
+    justifyContent: "space-between",
     paddingVertical: 25,
     paddingHorizontal: 15,
     marginTop: 80,
   },
   productDetails: {
     fontSize: 20,
-    fontWeight: '600',
+    fontWeight: "600",
     lineHeight: 24,
-    color: '#fff',
+    color: "#fff",
   },
   gap25: {
     gap: 25,
@@ -74,15 +68,15 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   button: {
-    backgroundColor: '#202224',
+    backgroundColor: "#202224",
     padding: 10,
     borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
 });

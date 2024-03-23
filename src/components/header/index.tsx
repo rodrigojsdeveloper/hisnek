@@ -1,15 +1,15 @@
-import { TouchableOpacity, View } from "react-native";
-import { useNavigation } from '@react-navigation/native';
-import { Logo } from "../logo";
+import { useContext } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Circle, Path, Svg } from "react-native-svg";
+import { Logo } from "../logo";
+import { ProductContext } from "../../context/product.context";
+import { HeaderProps } from "../../types/interfaces";
 
 import { styles } from "./style";
 
-interface HeaderProps {
-  goBack?: boolean
-}
-
 export const Header = ({ goBack }: HeaderProps) => {
+  const { quantity } = useContext(ProductContext);
   const navigation = useNavigation();
 
   const handleGoBack = () => {
@@ -17,8 +17,8 @@ export const Header = ({ goBack }: HeaderProps) => {
   };
 
   const handleCart = () => {
-    navigation.navigate('Cart')
-  }
+    navigation.navigate("Cart");
+  };
 
   return (
     <View style={styles.container}>
@@ -36,6 +36,13 @@ export const Header = ({ goBack }: HeaderProps) => {
       }
 
       <TouchableOpacity onPress={handleCart}>
+        {
+          quantity > 0 && (
+            <View style={styles.containerQuantity}>
+              <Text style={styles.textQuantity}>{quantity}</Text>
+            </View>
+          )
+        }
         <Svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <Circle cx="8" cy="21" r="1" />
           <Circle cx="19" cy="21" r="1" />
@@ -43,5 +50,5 @@ export const Header = ({ goBack }: HeaderProps) => {
         </Svg>
       </TouchableOpacity>
     </View>
-  )
+  );
 };
