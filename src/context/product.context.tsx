@@ -42,7 +42,45 @@ export const ProductContextProvider = ({ children }: PropsWithChildren) => {
     }
   ]);
 
-  const [productsInCart, setProductsInCart] = useState([])
+  const [productsInCart, setProductsInCart] = useState([
+    {
+      id: '2',
+      name: 'Tee Tonal Logo Black',
+      price: 189.00,
+      img: 'https://highcompanybr.com/wp-content/uploads/2024/03/Tee_Tonal_Logo_Black.jpg',
+      description: 'T-shirt made of 100% cotton. The logo is applied using screen printing on the front.',
+    },{
+      id: '2',
+      name: 'Tee Tonal Logo Black',
+      price: 189.00,
+      img: 'https://highcompanybr.com/wp-content/uploads/2024/03/Tee_Tonal_Logo_Black.jpg',
+      description: 'T-shirt made of 100% cotton. The logo is applied using screen printing on the front.',
+    },{
+      id: '2',
+      name: 'Tee Tonal Logo Black',
+      price: 189.00,
+      img: 'https://highcompanybr.com/wp-content/uploads/2024/03/Tee_Tonal_Logo_Black.jpg',
+      description: 'T-shirt made of 100% cotton. The logo is applied using screen printing on the front.',
+    },{
+      id: '2',
+      name: 'Tee Tonal Logo Black',
+      price: 189.00,
+      img: 'https://highcompanybr.com/wp-content/uploads/2024/03/Tee_Tonal_Logo_Black.jpg',
+      description: 'T-shirt made of 100% cotton. The logo is applied using screen printing on the front.',
+    },{
+      id: '2',
+      name: 'Tee Tonal Logo Black',
+      price: 189.00,
+      img: 'https://highcompanybr.com/wp-content/uploads/2024/03/Tee_Tonal_Logo_Black.jpg',
+      description: 'T-shirt made of 100% cotton. The logo is applied using screen printing on the front.',
+    },{
+      id: '2',
+      name: 'Tee Tonal Logo Black',
+      price: 189.00,
+      img: 'https://highcompanybr.com/wp-content/uploads/2024/03/Tee_Tonal_Logo_Black.jpg',
+      description: 'T-shirt made of 100% cotton. The logo is applied using screen printing on the front.',
+    },
+  ])
 
   const ProductContextData = {
     products,

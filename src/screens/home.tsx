@@ -2,12 +2,11 @@ import React, { useContext } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/navigation';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, View } from 'react-native';
 import { Product } from '../components/product';
 import { Header } from '../components/header';
 import { useNavigation } from '@react-navigation/native';
 import { ProductContext } from '../context/product.context';
-import { ProductDetailsProps } from '../types/interfaces';
 
 interface HomeScreenProps {
   navigation: StackNavigationProp<RootStackParamList, 'Home'>;
@@ -28,14 +27,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     <SafeAreaView style={styles.safe}>
       <View style={styles.container}>
         <Header />
-        <StatusBar style="auto" />
-        <ScrollView contentContainerStyle={styles.scrollView}>
-          {
-            products.map((product: ProductDetailsProps) => (
-              <Product navigation={navigation} product={product} />
-            ))
-          }
-        </ScrollView>
+        <FlatList
+          contentContainerStyle={styles.scrollView}
+          data={products}
+          renderItem={({ item }) => (
+            <Product navigation={navigation} product={item} />
+          )}
+          keyExtractor={(item) => item.id.toString()}
+        />
       </View>
     </SafeAreaView>
   );
@@ -55,5 +54,6 @@ const styles = StyleSheet.create({
   scrollView: {
     gap: 10,
     marginTop: 80,
+    paddingBottom: 80,
   },
 });
