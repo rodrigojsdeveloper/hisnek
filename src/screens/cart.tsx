@@ -3,6 +3,7 @@ import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from
 import { useNavigation } from "@react-navigation/native";
 import { ProductContext } from "../context/product.context";
 import { ProductInCart } from "../components/productInCart";
+import { StatusBar } from "expo-status-bar";
 
 export const CartScreen = () => {
   const { productsInCart, subTotal, quantity } = useContext(ProductContext);
@@ -10,11 +11,12 @@ export const CartScreen = () => {
   const nav = useNavigation();
 
   const handleHome = () => {
-    nav.navigate("Home");
+    nav.navigate("Home" as never);
   };
 
   return (
     <SafeAreaView style={styles.safe}>
+      <StatusBar backgroundColor="#0E0F11" style="light" />
       <View style={styles.container}>
         <Text style={styles.cartTitle}>Carrinho</Text>
         <FlatList

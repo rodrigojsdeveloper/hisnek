@@ -34,3 +34,13 @@ export interface HomeScreenProps {
 export interface ProductDetailsScreenProps {
   route: RouteProp<RootStackParamList, "ProductDetails">;
 };
+
+export interface ProductContextDataProps {
+  products: ProductDetailsProps[];
+  productsInCart: ProductDetailsProps[];
+  handleAddProductInCart: (product: ProductDetailsProps) => void;
+  handleRemoveProductInCart: (id: string) => void;
+  subTotal: number;
+  quantity: number;
+  handleFindProductDetails: (id: string) => ProductDetailsProps;
+};

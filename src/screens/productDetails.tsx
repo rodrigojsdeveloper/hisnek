@@ -1,21 +1,23 @@
 import React, { useContext } from "react";
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { ProductContext } from "../context/product.context";
-import { ProductDetailsProps, ProductDetailsScreenProps } from "../types/interfaces";
+import { ProductDetailsScreenProps } from "../types/interfaces";
 import { Header } from "../components/header";
 import { ImageProduct } from "../components/imageProduct";
 import { Title } from "../components/title";
 import { Description } from "../components/description";
 import { Price } from "../components/price";
+import { StatusBar } from "expo-status-bar";
 
 export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ route }) => {
   const { id } = route.params;
-  const { products, handleAddProductInCart } = useContext(ProductContext);
+  const { handleFindProductDetails, handleAddProductInCart } = useContext(ProductContext);
 
-  const productDetails = products.find((product: ProductDetailsProps) => product.id === id);
+  const productDetails = handleFindProductDetails(id);
 
   return (
     <SafeAreaView style={styles.safe}>
+      <StatusBar backgroundColor="#0E0F11" style="light" />
       <Header goBack />
       <View style={styles.container}>
         <View style={styles.gap25}>

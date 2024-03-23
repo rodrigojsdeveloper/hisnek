@@ -17,7 +17,7 @@ export const Header = ({ goBack }: HeaderProps) => {
   };
 
   const handleCart = () => {
-    navigation.navigate("Cart");
+    navigation.navigate("Cart" as never);
   };
 
   return (

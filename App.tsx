@@ -8,7 +8,7 @@ import { CartScreen } from "./src/screens/cart";
 
 const Stack = createStackNavigator();
 
-function App() {
+const App = () => {
   return (
     <Providers>
       <NavigationContainer>

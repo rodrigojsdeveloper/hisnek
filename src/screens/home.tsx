@@ -4,12 +4,14 @@ import { Product } from "../components/product";
 import { Header } from "../components/header";
 import { ProductContext } from "../context/product.context";
 import { HomeScreenProps } from "../types/interfaces";
+import { StatusBar } from "expo-status-bar";
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const { products } = useContext(ProductContext);
 
   return (
     <SafeAreaView style={styles.safe}>
+      <StatusBar backgroundColor="#0E0F11" style="light" />
       <View style={styles.container}>
         <Header />
         <FlatList

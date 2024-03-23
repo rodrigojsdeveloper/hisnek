@@ -1,7 +1,7 @@
 import { PropsWithChildren, createContext, useState } from "react";
-import { ProductDetailsProps } from "../types/interfaces";
+import { ProductContextDataProps, ProductDetailsProps } from "../types/interfaces";
 
-export const ProductContext = createContext({});
+export const ProductContext = createContext({} as ProductContextDataProps);
 
 export const ProductContextProvider = ({ children }: PropsWithChildren) => {
   const [products, setProducts] = useState<ProductDetailsProps[]>([
@@ -60,13 +60,24 @@ export const ProductContextProvider = ({ children }: PropsWithChildren) => {
     setProductsInCart(newProductsInCart);
   };
 
-  const ProductContextData = {
+  const handleFindProductDetails = (id: string) => {
+    const productDetails = products.find((product: ProductDetailsProps) => product.id === id);
+
+    if (!productDetails) {
+      throw new Error(`Product with ID ${id} not found.`);
+    }
+
+    return productDetails;
+  };
+
+  const ProductContextData: ProductContextDataProps = {
     products,
     productsInCart,
     handleAddProductInCart,
     handleRemoveProductInCart,
     subTotal,
     quantity,
+    handleFindProductDetails,
   };
 
   return <ProductContext.Provider value={ProductContextData}>{children}</ProductContext.Provider>;
