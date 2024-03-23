@@ -15,7 +15,7 @@ interface ProductProps {
 
 export const Product: React.FC<ProductProps> = ({ navigation, product }) => {
   return (
-    <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.navigate('ProductDetails', { id: product.id })}>
+    <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate('ProductDetails', { id: product.id })}>
       <View style={styles.container}>
         <ImageProduct uri={product.img} />
 

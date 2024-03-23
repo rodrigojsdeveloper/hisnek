@@ -31,7 +31,7 @@ export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ rout
     <SafeAreaView style={styles.safe}>
       <Header goBack />
       <View style={styles.container}>
-        <View style={styles.gap30}>
+        <View style={styles.gap25}>
           <Text style={styles.productDetails}>Detalhes do Produto</Text>
           <View style={styles.gap10}>
             <ImageProduct uri={productDetails.img} />
@@ -74,8 +74,8 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     color: '#fff',
   },
-  gap30: {
-    gap: 30,
+  gap25: {
+    gap: 25,
   },
   gap10: {
     gap: 10,
