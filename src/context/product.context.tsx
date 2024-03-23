@@ -42,8 +42,11 @@ export const ProductContextProvider = ({ children }: PropsWithChildren) => {
     }
   ]);
 
+  const [productsInCart, setProductsInCart] = useState([])
+
   const ProductContextData = {
     products,
+    productsInCart,
   };
 
   return <ProductContext.Provider value={ProductContextData}>{children}</ProductContext.Provider>;

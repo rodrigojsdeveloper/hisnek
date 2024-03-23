@@ -1,9 +1,9 @@
 import { TouchableOpacity, View } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { Logo } from "../logo";
+import { Circle, Path, Svg } from "react-native-svg";
 
 import { styles } from "./style";
-import { Circle, Path, Svg } from "react-native-svg";
 
 interface HeaderProps {
   goBack?: boolean
@@ -15,6 +15,10 @@ export const Header = ({ goBack }: HeaderProps) => {
   const handleGoBack = () => {
     navigation.goBack();
   };
+
+  const handleCart = () => {
+    navigation.navigate('Cart')
+  }
 
   return (
     <View style={styles.container}>
@@ -31,11 +35,13 @@ export const Header = ({ goBack }: HeaderProps) => {
         )
       }
 
-      <Svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <Circle cx="8" cy="21" r="1" />
-        <Circle cx="19" cy="21" r="1" />
-        <Path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
-      </Svg>
+      <TouchableOpacity onPress={handleCart}>
+        <Svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <Circle cx="8" cy="21" r="1" />
+          <Circle cx="19" cy="21" r="1" />
+          <Path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+        </Svg>
+      </TouchableOpacity>
     </View>
   )
 };
