@@ -19,5 +19,6 @@ export const styles = StyleSheet.create({
     borderColor: '#202224',
     paddingVertical: 10,
     paddingHorizontal: 20,
+    marginTop: 10,
   },
 });

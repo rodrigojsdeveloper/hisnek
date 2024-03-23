@@ -1,10 +1,10 @@
 import { TouchableOpacity, View } from "react-native";
-import { Description } from "../description";
 import { ImageProduct } from "../imageProduct";
 import { Title } from "../title";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types/navigation";
 import { ProductDetailsProps } from "../../types/interfaces";
+import { Price } from "../price";
 
 import { styles } from "./style";
 
@@ -22,7 +22,7 @@ export const Product: React.FC<ProductProps> = ({ navigation, product }) => {
         <View style={styles.content}>
           <Title>{product.name}</Title>
 
-          <Description>{product.description}</Description>
+          <Price>{product.price}</Price>
         </View>
       </View>
     </TouchableOpacity>

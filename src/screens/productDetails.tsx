@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
-import { RouteProp, useNavigation } from '@react-navigation/native';
+import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '../types/navigation';
 import { ProductContext } from '../context/product.context';
 import { ProductDetailsProps } from '../types/interfaces';
@@ -15,17 +15,10 @@ interface ProductDetailsScreenProps {
 }
 
 export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ route }) => {
-  const { products } = useContext(ProductContext);
   const { id } = route.params;
+  const { products, handleAddProductInCart } = useContext(ProductContext);
+
   const productDetails = products.find((product: ProductDetailsProps) => product.id === id);
-
-  const nav = useNavigation();
-
-  React.useLayoutEffect(() => {
-    nav.setOptions({
-      headerShown: false,
-    });
-  }, [nav]);
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -46,8 +39,8 @@ export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ rout
           </View>
         </View>
 
-        <TouchableOpacity activeOpacity={0.8} style={styles.button}>
-          <Text style={styles.buttonText}>Adicionar ao carrinho</Text>
+        <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={() => handleAddProductInCart(productDetails)}>
+          <Text style={styles.buttonText}>comprar</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -90,5 +83,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 16,
+    textTransform: 'uppercase',
   },
 });

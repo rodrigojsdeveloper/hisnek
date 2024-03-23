@@ -1,30 +1,17 @@
 import React, { useContext } from 'react';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../types/navigation';
-import { FlatList, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { ProductContext } from '../context/product.context';
 import { ProductInCart } from '../components/productInCart';
-import { ProductDetailsProps } from '../types/interfaces';
 
-interface HomeScreenProps {
-  navigation: StackNavigationProp<RootStackParamList, 'Home'>;
-}
-
-export const CartScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
-  const { productsInCart } = useContext(ProductContext);
+export const CartScreen = () => {
+  const { productsInCart, subTotal, quantity } = useContext(ProductContext);
 
   const nav = useNavigation();
 
   const handleHome = () => {
     nav.navigate('Home');
   };
-
-  React.useLayoutEffect(() => {
-    nav.setOptions({
-      headerShown: false,
-    });
-  }, [nav]);
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -37,6 +24,18 @@ export const CartScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             <ProductInCart product={item} />
           )}
           ListEmptyComponent={<Text style={styles.emptyMessage}>Seu carrinho está vazio.</Text>}
+          ListFooterComponent={
+            productsInCart.length > 0 ? <View style={styles.viewQuantity}>
+              <View style={styles.content}>
+                <Text style={styles.label}>Subtotal: </Text>
+                <Text style={styles.value}>$ {subTotal}</Text>
+              </View>
+              <View style={styles.content}>
+                <Text style={styles.label}>Quantidade: </Text>
+                <Text style={styles.value}>{quantity}</Text>
+              </View>
+            </View> : <></>
+          }
         />
 
         <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={handleHome}>
@@ -79,7 +78,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     lineHeight: 18,
-    color: '#FFF'
+    textAlign: 'center',
+    color: '#FFF',
+    padding: 15,
   },
   button: {
     backgroundColor: '#202224',
@@ -93,5 +94,25 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     textTransform: 'uppercase',
+  },
+  viewQuantity: {
+    padding: 10,
+    gap: 10,
+  },
+  content: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  label: {
+    fontSize: 14,
+    fontWeight: '600',
+    lineHeight: 20,
+    color: '#FFF',
+  },
+  value: {
+    fontSize: 12,
+    fontWeight: '500',
+    lineHeight: 16,
+    color: '#7C7C8A',
   },
 });

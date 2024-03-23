@@ -1,11 +1,9 @@
 import React, { useContext } from 'react';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/navigation';
-import { StatusBar } from 'expo-status-bar';
 import { FlatList, SafeAreaView, StyleSheet, View } from 'react-native';
 import { Product } from '../components/product';
 import { Header } from '../components/header';
-import { useNavigation } from '@react-navigation/native';
 import { ProductContext } from '../context/product.context';
 
 interface HomeScreenProps {
@@ -14,14 +12,6 @@ interface HomeScreenProps {
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const { products } = useContext(ProductContext);
-
-  const nav = useNavigation();
-
-  React.useLayoutEffect(() => {
-    nav.setOptions({
-      headerShown: false,
-    });
-  }, [nav]);
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -48,12 +38,12 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingVertical: 25,
+    paddingTop: 25,
     paddingHorizontal: 15,
   },
   scrollView: {
     gap: 10,
     marginTop: 80,
-    paddingBottom: 80,
+    paddingBottom: 95,
   },
 });
