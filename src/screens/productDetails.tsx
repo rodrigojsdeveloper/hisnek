@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 import { ProductContext } from "../context/product.context";
 import { ProductDetailsScreenProps } from "../types/interfaces";
 import { Header } from "../components/header";
@@ -8,6 +8,7 @@ import { Title } from "../components/title";
 import { Description } from "../components/description";
 import { Price } from "../components/price";
 import { StatusBar } from "expo-status-bar";
+import { Button } from "../components/button";
 
 export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ route }) => {
   const { id } = route.params;
@@ -28,16 +29,16 @@ export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ rout
             <View style={styles.gap10}>
               <Title>{productDetails.name}</Title>
 
-              <Price>{productDetails.price}</Price>
-
               <Description>{productDetails.description}</Description>
+
+              <Price>{productDetails.price}</Price>
             </View>
           </View>
         </View>
 
-        <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={() => handleAddProductInCart(productDetails)}>
-          <Text style={styles.buttonText}>comprar</Text>
-        </TouchableOpacity>
+        <Button onPress={() => handleAddProductInCart(productDetails)}>
+          comprar
+        </Button>
       </View>
     </SafeAreaView>
   );
@@ -68,17 +69,5 @@ const styles = StyleSheet.create({
   },
   gap10: {
     gap: 10,
-  },
-  button: {
-    backgroundColor: "#202224",
-    padding: 10,
-    borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-    textTransform: "uppercase",
   },
 });

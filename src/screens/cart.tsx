@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import { FlatList, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { ProductContext } from "../context/product.context";
 import { ProductInCart } from "../components/productInCart";
 import { StatusBar } from "expo-status-bar";
+import { Button } from "../components/button";
 
 export const CartScreen = () => {
   const { productsInCart, subTotal, quantity } = useContext(ProductContext);
@@ -40,9 +41,9 @@ export const CartScreen = () => {
           }
         />
 
-        <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={handleHome}>
-          <Text style={styles.buttonText}>retornar para a loja</Text>
-        </TouchableOpacity>
+        <Button onPress={handleHome}>
+          retornar para a loja
+        </Button>
       </View>
     </SafeAreaView>
   );
@@ -81,21 +82,8 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     lineHeight: 18,
     textAlign: "center",
-    color: "#FFF",
+    color: "#fff",
     padding: 15,
-  },
-  button: {
-    backgroundColor: "#202224",
-    padding: 10,
-    borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-    fontWeight: "600",
-    textTransform: "uppercase",
   },
   viewQuantity: {
     padding: 10,
@@ -109,7 +97,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "600",
     lineHeight: 20,
-    color: "#FFF",
+    color: "#fff",
   },
   value: {
     fontSize: 12,

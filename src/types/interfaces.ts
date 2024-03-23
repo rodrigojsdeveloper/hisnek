@@ -1,3 +1,4 @@
+import { GestureResponderEvent } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "./navigation";
@@ -43,4 +44,8 @@ export interface ProductContextDataProps {
   subTotal: number;
   quantity: number;
   handleFindProductDetails: (id: string) => ProductDetailsProps;
+};
+
+export interface ButtoProps {
+  onPress?: (((event: GestureResponderEvent) => void) & (() => void));
 };
