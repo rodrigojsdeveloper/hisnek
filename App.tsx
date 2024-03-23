@@ -1,11 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import { Product } from './src/components/product';
+import { Header } from './src/components/header';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.safe}>
       <View style={styles.container}>
+        <Header />
         <StatusBar style="auto" />
         <ScrollView contentContainerStyle={styles.scrollView}>
           <Product />
@@ -32,5 +34,6 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     gap: 10,
+    marginTop: 80,
   },
 });
