@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  image: {
-    height: 160,
-    borderRadius: 10,
-    backgroundColor: '#fff',
+  price: {
+    fontSize: 14,
+    fontWeight: '500',
+    lineHeight: 16,
+    color: '#888888',
   },
 });

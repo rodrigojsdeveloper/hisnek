@@ -6,9 +6,10 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     width,
-    height: 80,
-    alignItems: 'flex-end',
-    justifyContent: 'center',
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
     backgroundColor: '#0E0F11',
     position: 'absolute',
     top: 0,
@@ -18,5 +19,6 @@ export const styles = StyleSheet.create({
     borderColor: '#202224',
     paddingVertical: 10,
     paddingHorizontal: 20,
+    marginTop: 20,
   },
 });

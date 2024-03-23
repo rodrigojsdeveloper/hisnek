@@ -11,7 +11,7 @@ export const ImageProduct = ({ uri }: ImageProductProps) => {
     <Image
       style={styles.image}
       source={{ uri }}
-      resizeMode="cover"
+      resizeMode="contain"
     />
   )
 };
