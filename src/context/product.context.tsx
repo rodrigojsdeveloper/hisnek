@@ -1,70 +1,109 @@
-import { PropsWithChildren, createContext, useEffect, useState } from "react";
+import React, { PropsWithChildren, createContext, useEffect, useState } from "react";
 import { ProductContextDataProps, ProductDetailsProps } from "../types/interfaces";
 import axios from "axios";
 
 export const ProductContext = createContext({} as ProductContextDataProps);
 
-export const ProductContextProvider = ({ children }: PropsWithChildren) => {
+const GRAPHQL_ENDPOINT = "http://10.0.0.132:4000/graphql";
+
+const getProductQuery = `
+  query {
+    getProducts {
+      id
+      img
+      name
+      price
+      description
+    }
+  }
+`;
+
+const addToCartMutation = `
+  mutation AddToCart($product: ProductInput!) {
+    addToCart(product: $product) {
+      id
+      name
+      price
+      img
+      description
+    }
+  }
+`;
+
+const removeToCartMutation = `
+  mutation RemoveFromCart($id: ID!) {
+    removeToCart(id: $id)
+  }
+`;
+
+const findProductQuery = (id: string) => `
+  query {
+    findProduct(id: "${id}") {
+      id
+      img
+      name
+      price
+      description
+    }
+  }
+`;
+
+const quantityAndSubTotal = `
+  query {
+    quantity
+    subTotal
+  }
+`;
+
+const clearCart = `
+  query ClearCart {
+    clearCart {
+      success
+    }  
+  }
+`;
+
+const handleError = (message: string, error: any) => {
+  console.error(message, error);
+};
+
+const fetchData = async (query: string) => {
+  try {
+    const { data } = await axios.post(GRAPHQL_ENDPOINT, { query });
+    return data;
+  } catch (error) {
+    handleError("Erro ao fazer a solicitação GraphQL:", error);
+    throw error;
+  }
+};
+
+export const ProductContextProvider = ({ children }: PropsWithChildren<{}>) => {
   const [products, setProducts] = useState<ProductDetailsProps[]>([]);
   const [productsInCart, setProductsInCart] = useState<ProductDetailsProps[]>([]);
+  const [quantity, setQuantity] = useState<number>(0);
+  const [subTotal, setSubTotal] = useState<number>(0);
 
-  const subTotal = productsInCart.reduce((previousValue: number, product: ProductDetailsProps) => previousValue + product.price, 0);
-  const quantity = productsInCart.length;
-
-  const GRAPHQL_ENDPOINT = "http://10.0.0.132:4000/graphql";
-
-  const fetchData = async () => {
-    const query = `
-      query {
-        getProducts {
-          id
-          img
-          name
-          price
-          description
-        }
-      }
-    `;
-
-    try {
-      const response = await axios.post(GRAPHQL_ENDPOINT, { query });
-      setProducts(response.data.data.getProducts);
-    } catch (error) {
-      console.error("Erro ao fazer a solicitação GraphQL:", error);
-    }
+  const fetchProducts = async () => {
+    const { data } = await fetchData(getProductQuery);
+    setProducts(data.getProducts);
   };
 
   const handleAddProductInCart = async (product: ProductDetailsProps) => {
-    console.log(product);
-    const mutation = `
-      mutation AddToCart($product: ProductInput!) {
-        addToCart(product: $product) {
-          id
-          name
-          price
-          img
-          description
-        }
-      }
-    `;
-
     try {
-      await axios.post(GRAPHQL_ENDPOINT, { query: mutation, variables: { product } });
-      setProductsInCart([...productsInCart, product]);
+      const { data } = await axios.post(GRAPHQL_ENDPOINT, { query: addToCartMutation, variables: { product } });
+      const addedProduct = data.data.addToCart;
+      const isProductInCart = productsInCart.some(p => p.id === addedProduct.id);
+      if (!isProductInCart) {
+        setProductsInCart([addedProduct, ...productsInCart]);
+      }
     } catch (error) {
-      console.error("Erro ao adicionar produto ao carrinho:", error);
+      handleError("Erro ao adicionar produto ao carrinho:", error);
     }
   };
 
   const handleRemoveProductInCart = async (id: string) => {
-    const mutation = `
-      mutation {
-        removeToCart(id: "${id}")
-      }
-    `;
-
     try {
-      await axios.post(GRAPHQL_ENDPOINT, { query: mutation });
+      await axios.post(GRAPHQL_ENDPOINT, { query: removeToCartMutation, variables: { id } });
       const newProductsInCart = productsInCart.filter((p: ProductDetailsProps) => p.id !== id);
       setProductsInCart(newProductsInCart);
     } catch (error) {
@@ -73,33 +112,42 @@ export const ProductContextProvider = ({ children }: PropsWithChildren) => {
   };
 
   const handleFindProductDetails = async (id: string) => {
-    const query = `
-      query {
-        findProduct(id: "${id}") {
-          id
-          img
-          name
-          price
-          description
-        }
-      }
-    `;
-
     try {
-      const response = await axios.post(GRAPHQL_ENDPOINT, { query });
-      const productDetails = response.data.data.findProduct;
+      const { data } = await fetchData(findProductQuery(id));
+      const productDetails = data.findProduct;
       if (!productDetails) {
         throw new Error(`Product with ID ${id} not found.`);
       }
       return productDetails;
     } catch (error) {
-      console.error("Erro ao encontrar detalhes do produto:", error);
+      handleError("Erro ao encontrar detalhes do produto:", error);
+      throw error;
+    }
+  };
+
+  const handleQuantityAndSubTotal = async () => {
+    try {
+      const { data } = await fetchData(quantityAndSubTotal);
+      setQuantity(data.quantity);
+      setSubTotal(data.subTotal);
+    } catch (error) {
+      handleError("Erro ao encontrar detalhes do produto:", error);
+      throw error;
+    }
+  };
+
+  const handleClearCart = async () => {
+    try {
+      const { data } = await fetchData(clearCart);
+      if (data.clearCart.success) setProductsInCart([]);
+    } catch (error) {
+      handleError("Erro ao limpar carrinho de compras:", error);
       throw error;
     }
   };
 
   useEffect(() => {
-    fetchData();
+    fetchProducts();
   }, []);
 
   const ProductContextData: ProductContextDataProps = {
@@ -110,6 +158,8 @@ export const ProductContextProvider = ({ children }: PropsWithChildren) => {
     subTotal,
     quantity,
     handleFindProductDetails,
+    handleQuantityAndSubTotal,
+    handleClearCart,
   };
 
   return <ProductContext.Provider value={ProductContextData}>{children}</ProductContext.Provider>;

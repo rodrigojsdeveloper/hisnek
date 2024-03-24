@@ -1,13 +1,17 @@
 import { PropsWithChildren } from "react";
 import { Text } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { ButtoProps } from "../../types/interfaces";
+import { ButtonProps } from "../../types/interfaces";
 
 import { styles } from "./style";
 
-export const Button = ({ onPress, children }: PropsWithChildren<ButtoProps>) => {
+export const Button = ({ isBackgroundColor, onPress, children }: PropsWithChildren<ButtonProps>) => {
   return (
-    <TouchableOpacity activeOpacity={0.8} style={styles.button} onPress={onPress}>
+    <TouchableOpacity
+      activeOpacity={isBackgroundColor ? 0.8 : 1}
+      style={[{ backgroundColor: isBackgroundColor ? "#202224" : "transparent" }, styles.button]}
+      onPress={onPress}
+    >
       <Text style={styles.buttonText}>{children}</Text>
     </TouchableOpacity>
   );

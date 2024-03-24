@@ -45,8 +45,11 @@ export interface ProductContextDataProps {
   subTotal: number;
   quantity: number;
   handleFindProductDetails: (id: string) => Promise<ProductDetailsProps>;
+  handleQuantityAndSubTotal: () => void;
+  handleClearCart: () => void;
 };
 
-export interface ButtoProps {
+export interface ButtonProps {
+  isBackgroundColor?: boolean;
   onPress?: (((event: GestureResponderEvent) => void) & (() => void));
 };

@@ -7,7 +7,7 @@ import { StatusBar } from "expo-status-bar";
 import { Button } from "../components/button";
 
 export const CartScreen = () => {
-  const { productsInCart, subTotal, quantity } = useContext(ProductContext);
+  const { productsInCart, subTotal, quantity, handleClearCart, handleQuantityAndSubTotal } = useContext(ProductContext);
 
   const nav = useNavigation();
 
@@ -41,9 +41,17 @@ export const CartScreen = () => {
           }
         />
 
-        <Button onPress={handleHome}>
-          retornar para a loja
-        </Button>
+        <View style={styles.containerButtons}>
+          <Button onPress={() => {
+            handleClearCart()
+            handleQuantityAndSubTotal()
+          }}>
+            limpar carrinho
+          </Button>
+          <Button onPress={handleHome} isBackgroundColor>
+            retornar para a loja
+          </Button>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -104,5 +112,8 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     lineHeight: 16,
     color: "#7C7C8A",
+  },
+  containerButtons: {
+    gap: 10,
   },
 });

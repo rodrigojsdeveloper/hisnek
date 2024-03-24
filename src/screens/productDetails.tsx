@@ -12,7 +12,7 @@ import { Button } from "../components/button";
 
 export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ route }) => {
   const { id } = route.params;
-  const { handleFindProductDetails, handleAddProductInCart } = useContext(ProductContext);
+  const { handleFindProductDetails, handleAddProductInCart, handleQuantityAndSubTotal } = useContext(ProductContext);
   const [productDetails, setProductDetails] = useState<ProductDetailsProps | null>(null);
 
   useEffect(() => {
@@ -52,11 +52,17 @@ export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ rout
           </View>
         </View>
 
-        <Button onPress={() => handleAddProductInCart(productDetails)}>
+        <Button
+          onPress={() => {
+            handleAddProductInCart(productDetails);
+            handleQuantityAndSubTotal();
+          }}
+          isBackgroundColor
+        >
           comprar
         </Button>
       </View>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 };
 

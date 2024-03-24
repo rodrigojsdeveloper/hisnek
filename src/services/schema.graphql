@@ -10,6 +10,13 @@ type Query {
   getProducts: [Product!]!
   getCartProducts: [Product!]!
   findProduct(id: ID!): Product
+  quantity: Int!
+  subTotal: Int!
+  clearCart: ClearCartPayload!
+}
+
+type ClearCartPayload {
+  success: Boolean!
 }
 
 type Mutation {
