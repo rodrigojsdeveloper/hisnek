@@ -41,9 +41,29 @@ const products = [{
   description: "Water-repellent polyamide jacket with double-weave embroidered label on the pocket and outline logo embroidered on the sleeve.",
 }];
 
+const productsInCart = []
+
 const resolvers = {
   Query: {
     getProducts: () => products,
+    getCartProducts: () => productsInCart,
+    findProduct: (parent, { id }) => products.find(product => product.id === id),
+  },
+  Mutation: {
+    addToCart: (parent, { product }) => {
+      const productToAdd = products.find(p => p.id === product.id);
+      if (productToAdd) {
+        productsInCart.push(productToAdd);
+        return productToAdd;
+      }
+    },
+    removeToCart: (parent, { id }) => {
+      const index = productsInCart.findIndex(product => product.id === id);
+      if (index !== -1) {
+        const removedProduct = productsInCart.splice(index, 1)[0];
+        return removedProduct.id;
+      }
+    },
   },
 };
 

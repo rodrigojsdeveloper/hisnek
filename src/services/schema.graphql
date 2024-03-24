@@ -9,7 +9,18 @@ type Product {
 type Query {
   getProducts: [Product!]!
   getCartProducts: [Product!]!
-  subTotal: Int!
-  quantity: Int!
-  findProduct: [Product!]!
+  findProduct(id: ID!): Product
+}
+
+type Mutation {
+  addToCart(product: ProductInput!): Product
+  removeToCart(id: ID!): ID
+}
+
+input ProductInput {
+  id: ID!
+  name: String!
+  price: Float!
+  img: String!
+  description: String!
 }

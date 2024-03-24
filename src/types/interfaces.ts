@@ -44,7 +44,7 @@ export interface ProductContextDataProps {
   handleRemoveProductInCart: (id: string) => void;
   subTotal: number;
   quantity: number;
-  handleFindProductDetails: (id: string) => ProductDetailsProps;
+  handleFindProductDetails: (id: string) => Promise<ProductDetailsProps>;
 };
 
 export interface ButtoProps {

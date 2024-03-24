@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 import { ProductContext } from "../context/product.context";
-import { ProductDetailsScreenProps } from "../types/interfaces";
+import { ProductDetailsProps, ProductDetailsScreenProps } from "../types/interfaces";
 import { Header } from "../components/header";
 import { ImageProduct } from "../components/imageProduct";
 import { Title } from "../components/title";
@@ -13,8 +13,24 @@ import { Button } from "../components/button";
 export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ route }) => {
   const { id } = route.params;
   const { handleFindProductDetails, handleAddProductInCart } = useContext(ProductContext);
+  const [productDetails, setProductDetails] = useState<ProductDetailsProps | null>(null);
 
-  const productDetails = handleFindProductDetails(id);
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      try {
+        const details = await handleFindProductDetails(id);
+        setProductDetails(details);
+      } catch (error) {
+        console.error("Erro ao buscar detalhes do produto:", error);
+      }
+    };
+
+    fetchProductDetails();
+  }, [handleFindProductDetails, id]);
+
+  if (!productDetails) {
+    return null; // ou renderize um indicador de carregamento
+  }
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -24,7 +40,7 @@ export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ rout
         <View style={styles.gap25}>
           <Text style={styles.productDetails}>Detalhes do Produto</Text>
           <View style={styles.gap10}>
-            <ImageProduct uri={productDetails.img} />
+            <ImageProduct uri={productDetails.img} alt={productDetails.name} />
 
             <View style={styles.gap10}>
               <Title>{productDetails.name}</Title>
