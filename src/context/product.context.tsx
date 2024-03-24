@@ -1,17 +1,20 @@
 import { PropsWithChildren, createContext, useEffect, useState } from "react";
 import { ProductContextDataProps, ProductDetailsProps } from "../types/interfaces";
 import axios from "axios";
+import "dotenv";
 
 export const ProductContext = createContext({} as ProductContextDataProps);
 
 export const ProductContextProvider = ({ children }: PropsWithChildren) => {
+  const ID_IPVA4 = process.env.IPV4_ADDRESS;
+
   const [products, setProducts] = useState<ProductDetailsProps[]>([]);
   const [productsInCart, setProductsInCart] = useState<ProductDetailsProps[]>([]);
 
   const subTotal = productsInCart.reduce((previousValue: number, product: ProductDetailsProps) => previousValue + product.price, 0);
   const quantity = productsInCart.length;
 
-  const GRAPHQL_ENDPOINT = 'http://10.0.0.132:4000/graphql';
+  const GRAPHQL_ENDPOINT = `http://${ID_IPVA4}:4000/graphql`;
 
   const fetchData = async () => {
     const query = `
@@ -34,10 +37,6 @@ export const ProductContextProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const handleAddProductInCart = async (product: ProductDetailsProps) => {
     console.log(product);
     const mutation = `
@@ -51,7 +50,7 @@ export const ProductContextProvider = ({ children }: PropsWithChildren) => {
         }
       }
     `;
-  
+
     try {
       await axios.post(GRAPHQL_ENDPOINT, { query: mutation, variables: { product } });
       setProductsInCart([...productsInCart, product]);
@@ -101,6 +100,10 @@ export const ProductContextProvider = ({ children }: PropsWithChildren) => {
       throw error;
     }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const ProductContextData: ProductContextDataProps = {
     products,
