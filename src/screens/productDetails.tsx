@@ -29,7 +29,7 @@ export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ rout
   }, [handleFindProductDetails, id]);
 
   if (!productDetails) {
-    return null; // ou renderize um indicador de carregamento
+    return null;
   }
 
   return (

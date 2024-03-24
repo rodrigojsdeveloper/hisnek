@@ -1,9 +1,9 @@
-const { ApolloServer, gql } = require('apollo-server');
-const fs = require('fs');
-const path = require('path');
+const { ApolloServer, gql } = require("apollo-server");
+const path = require("path");
+const fs = require("fs");
 
-const schemaPath = path.join(__dirname, 'schema.graphql');
-const typeDefs = gql(fs.readFileSync(schemaPath, { encoding: 'utf-8' }));
+const schemaPath = path.join(__dirname, "schema.graphql");
+const typeDefs = gql(fs.readFileSync(schemaPath, { encoding: "utf-8" }));
 
 const products = [{
   id: "1",
@@ -41,7 +41,7 @@ const products = [{
   description: "Water-repellent polyamide jacket with double-weave embroidered label on the pocket and outline logo embroidered on the sleeve.",
 }];
 
-const productsInCart = []
+const productsInCart = [];
 
 const resolvers = {
   Query: {

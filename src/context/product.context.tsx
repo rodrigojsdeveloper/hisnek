@@ -1,20 +1,17 @@
 import { PropsWithChildren, createContext, useEffect, useState } from "react";
 import { ProductContextDataProps, ProductDetailsProps } from "../types/interfaces";
 import axios from "axios";
-import "dotenv";
 
 export const ProductContext = createContext({} as ProductContextDataProps);
 
 export const ProductContextProvider = ({ children }: PropsWithChildren) => {
-  const ID_IPVA4 = process.env.IPV4_ADDRESS;
-
   const [products, setProducts] = useState<ProductDetailsProps[]>([]);
   const [productsInCart, setProductsInCart] = useState<ProductDetailsProps[]>([]);
 
   const subTotal = productsInCart.reduce((previousValue: number, product: ProductDetailsProps) => previousValue + product.price, 0);
   const quantity = productsInCart.length;
 
-  const GRAPHQL_ENDPOINT = `http://${ID_IPVA4}:4000/graphql`;
+  const GRAPHQL_ENDPOINT = "http://10.0.0.132:4000/graphql";
 
   const fetchData = async () => {
     const query = `
@@ -33,7 +30,7 @@ export const ProductContextProvider = ({ children }: PropsWithChildren) => {
       const response = await axios.post(GRAPHQL_ENDPOINT, { query });
       setProducts(response.data.data.getProducts);
     } catch (error) {
-      console.error('Erro ao fazer a solicitação GraphQL:', error);
+      console.error("Erro ao fazer a solicitação GraphQL:", error);
     }
   };
 
@@ -55,7 +52,7 @@ export const ProductContextProvider = ({ children }: PropsWithChildren) => {
       await axios.post(GRAPHQL_ENDPOINT, { query: mutation, variables: { product } });
       setProductsInCart([...productsInCart, product]);
     } catch (error) {
-      console.error('Erro ao adicionar produto ao carrinho:', error);
+      console.error("Erro ao adicionar produto ao carrinho:", error);
     }
   };
 
@@ -71,7 +68,7 @@ export const ProductContextProvider = ({ children }: PropsWithChildren) => {
       const newProductsInCart = productsInCart.filter((p: ProductDetailsProps) => p.id !== id);
       setProductsInCart(newProductsInCart);
     } catch (error) {
-      console.error('Erro ao remover produto do carrinho:', error);
+      console.error("Erro ao remover produto do carrinho:", error);
     }
   };
 
@@ -96,7 +93,7 @@ export const ProductContextProvider = ({ children }: PropsWithChildren) => {
       }
       return productDetails;
     } catch (error) {
-      console.error('Erro ao encontrar detalhes do produto:', error);
+      console.error("Erro ao encontrar detalhes do produto:", error);
       throw error;
     }
   };
