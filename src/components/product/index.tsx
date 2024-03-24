@@ -10,7 +10,7 @@ export const Product: React.FC<ProductProps> = ({ navigation, product }) => {
   return (
     <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate("ProductDetails", { id: product.id })}>
       <View style={styles.container}>
-        <ImageProduct uri={product.img} />
+        <ImageProduct uri={product.img} alt={product.name} />
 
         <View style={styles.content}>
           <Title>{product.name}</Title>

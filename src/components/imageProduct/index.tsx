@@ -3,12 +3,13 @@ import { ImageProductProps } from "../../types/interfaces";
 
 import { styles } from "./style";
 
-export const ImageProduct = ({ uri }: ImageProductProps) => {
+export const ImageProduct = ({ uri, alt }: ImageProductProps) => {
   return (
     <Image
       style={styles.image}
       source={{ uri }}
       resizeMode="contain"
+      alt={alt}
     />
   );
 };

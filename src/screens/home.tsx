@@ -36,11 +36,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 25,
-    paddingHorizontal: 15,
   },
   scrollView: {
     gap: 10,
     marginTop: 80,
     paddingBottom: 95,
+    paddingHorizontal: 15,
   },
 });

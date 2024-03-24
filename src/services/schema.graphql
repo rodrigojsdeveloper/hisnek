@@ -1,11 +1,15 @@
 type Product {
-    id: ID!
-    name: String!
-    price: Float!
-    img: String!
-    description: String!
+  id: ID!
+  name: String!
+  price: Float!
+  img: String!
+  description: String!
 }
 
 type Query {
-    getProducts: [Product!]!
+  getProducts: [Product!]!
+  getCartProducts: [Product!]!
+  subTotal: Int!
+  quantity: Int!
+  findProduct: [Product!]!
 }

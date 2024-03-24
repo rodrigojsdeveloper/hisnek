@@ -1,22 +1,11 @@
 const { ApolloServer, gql } = require('apollo-server');
+const fs = require('fs');
+const path = require('path');
 
-// Definindo o esquema GraphQL
-const typeDefs = gql`
-  type Product {
-    id: ID!
-    name: String!
-    price: Float!
-    img: String!
-    description: String!
-  }
+const schemaPath = path.join(__dirname, 'schema.graphql');
+const typeDefs = gql(fs.readFileSync(schemaPath, { encoding: 'utf-8' }));
 
-  type Query {
-    products: [Product]!
-  }
-`;
-
-// Dados falsos de exemplo
-const productsData = [{
+const products = [{
   id: "1",
   name: "Shorts Bridge Black",
   price: 289.00,
@@ -52,17 +41,14 @@ const productsData = [{
   description: "Water-repellent polyamide jacket with double-weave embroidered label on the pocket and outline logo embroidered on the sleeve.",
 }];
 
-// Resolvedores para as consultas
 const resolvers = {
   Query: {
-    products: () => productsData,
+    getProducts: () => products,
   },
 };
 
-// Criando o servidor Apollo GraphQL
 const server = new ApolloServer({ typeDefs, resolvers });
 
-// Iniciando o servidor
 server.listen().then(({ url }) => {
   console.log(`Servidor GraphQL pronto em ${url}`);
 });

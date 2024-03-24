@@ -17,6 +17,7 @@ export interface HeaderProps {
 
 export interface ImageProductProps {
   uri: string;
+  alt: string;
 };
 
 export interface ProductProps {

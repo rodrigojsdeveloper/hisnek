@@ -5,43 +5,7 @@ import axios from "axios";
 export const ProductContext = createContext({} as ProductContextDataProps);
 
 export const ProductContextProvider = ({ children }: PropsWithChildren) => {
-  const [products, setProducts] = useState<ProductDetailsProps[]>([
-    {
-      id: "1",
-      name: "Shorts Bridge Black",
-      price: 289.00,
-      img: "https://cdn.highcompanybr.com/wp-content/uploads/2024/03/Shorts_Bridge_Black.jpg",
-      description: "Nylon shorts with a modern design, featuring cutouts and colorful seams that add texture to the pieces. It has a capsule tag.",
-    },
-    {
-      id: "2",
-      name: "Tee Tonal Logo Black",
-      price: 189.00,
-      img: "https://highcompanybr.com/wp-content/uploads/2024/03/Tee_Tonal_Logo_Black.jpg",
-      description: "T-shirt made of 100% cotton. The logo is applied using screen printing on the front.",
-    },
-    {
-      id: "3",
-      name: "Ripstop 5 Panel Logo Black",
-      price: 189.00,
-      img: "https://cdn.highcompanybr.com/wp-content/uploads/2024/03/Ripstop_5_Panel_Logo_Black.jpg",
-      description: "6-panel polyamide cap with snapback closure and embroidered graphic.",
-    },
-    {
-      id: "4",
-      name: "Sling Bag Essentials Black",
-      price: 329.00,
-      img: "https://cdn.highcompanybr.com/wp-content/uploads/2024/03/Sling_Bag_Essentials_Black.jpg",
-      description: "It features a main flap pocket, ideal for secure storage, a smaller pocket with reverse zipper for small items, and a mesh kangaroo pocket for easy access items. It also has a black rubberized label on the front.",
-    },
-    {
-      id: "5",
-      name: "Rain Jacket Outline Logo Black",
-      price: 599.00,
-      img: "https://cdn.highcompanybr.com/wp-content/uploads/2024/02/Rain_Jacket_Outline_Logo_Black.jpg",
-      description: "Water-repellent polyamide jacket with double-weave embroidered label on the pocket and outline logo embroidered on the sleeve.",
-    }
-  ]);
+  const [products, setProducts] = useState<ProductDetailsProps[]>([]);
 
   const [productsInCart, setProductsInCart] = useState<ProductDetailsProps[]>([]);
 
@@ -72,27 +36,25 @@ export const ProductContextProvider = ({ children }: PropsWithChildren) => {
   };
 
   async function fetchData() {
-    // Defina o endpoint GraphQL
-    const GRAPHQL_ENDPOINT = 'http://localhost:4000/graphql'; // Substitua PORT pela porta do seu servidor GraphQL
+    const GRAPHQL_ENDPOINT = 'http://10.0.0.132:4000/graphql';
 
-    // Defina a consulta GraphQL
     const query = `
-  query {
-    products {
-      id
-      name
-      price
-      description
+    query {
+      getProducts {
+        id
+        img
+        name
+        price
+        description
+      }
     }
-  }
-`;
+  `;
 
-    // Envie a solicitação POST para o endpoint GraphQL
     axios.post(GRAPHQL_ENDPOINT, {
       query
     })
       .then(response => {
-        console.log('Resposta da API GraphQL:', response.data);
+        setProducts(response.data.data.getProducts);
       })
       .catch(error => {
         console.error('Erro ao fazer a solicitação GraphQL:', error);
