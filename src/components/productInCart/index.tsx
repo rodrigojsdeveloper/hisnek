@@ -3,6 +3,7 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import { Svg, Path } from "react-native-svg";
 import { ProductInCartProps } from "../../types/interfaces";
 import { ProductContext } from "../../context/product.context";
+import { Price } from "../price";
 
 import { styles } from "./style";
 
@@ -31,7 +32,7 @@ export const ProductInCart = ({ product }: ProductInCartProps) => {
 
       <View style={styles.content}>
         <Text style={styles.label}>Preço: </Text>
-        <Text style={styles.value}>R$ {product.price.toFixed(2).replace('.', ',')}</Text>
+        <Price price={product.price} isDarkGray />
       </View>
     </View>
   );

@@ -5,6 +5,7 @@ import { ProductContext } from "../context/product.context";
 import { ProductInCart } from "../components/productInCart";
 import { StatusBar } from "expo-status-bar";
 import { Button } from "../components/button";
+import { Price } from "../components/price";
 
 export const CartScreen = () => {
   const { productsInCart, subTotal, quantity, handleClearCart, handleQuantityAndSubTotal } = useContext(ProductContext);
@@ -33,7 +34,7 @@ export const CartScreen = () => {
             quantityVerify ? <View style={styles.viewQuantity}>
               <View style={styles.content}>
                 <Text style={styles.label}>SubTotal: </Text>
-                <Text style={styles.value}>R$ {subTotal.toFixed(2).replace('.', ',')}</Text>
+                <Price price={subTotal} isDarkGray />
               </View>
               <View style={styles.content}>
                 <Text style={styles.label}>Quantidade: </Text>

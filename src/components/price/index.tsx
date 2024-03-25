@@ -1,10 +1,10 @@
-import { PropsWithChildren } from "react";
 import { Text } from "react-native";
+import { PriceProps } from "../../types/interfaces";
 
 import { styles } from "./style";
 
-export const Price = ({ children }: PropsWithChildren) => {
+export const Price = ({ price, isDarkGray }: PriceProps) => {
   return (
-    <Text style={styles.price}>R$ {children}</Text>
+    <Text style={[isDarkGray ? styles.darkGray : styles.gray]}>R$ {price.toFixed(2).replace('.', ',')}</Text>
   );
 };

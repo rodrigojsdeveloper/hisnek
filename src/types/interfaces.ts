@@ -53,3 +53,8 @@ export interface ButtonProps {
   isBackgroundColor?: boolean;
   onPress?: (((event: GestureResponderEvent) => void) & (() => void));
 };
+
+export interface PriceProps {
+  price: number;
+  isDarkGray?: boolean;
+}
