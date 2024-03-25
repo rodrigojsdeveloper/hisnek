@@ -8,7 +8,7 @@ import { Price } from "../price";
 import { styles } from "./style";
 
 export const ProductInCart = ({ product }: ProductInCartProps) => {
-  const { handleRemoveProductInCart, handleQuantityAndSubTotal } = useContext(ProductContext);
+  const { handleRemoveProductInCart, handleQuantityAndSubTotal, isLoadingRemoveProduct } = useContext(ProductContext);
 
   return (
     <View style={styles.container}>

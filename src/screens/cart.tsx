@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FlatList, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { FlatList, SafeAreaView, StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { ProductContext } from "../context/product.context";
 import { ProductInCart } from "../components/productInCart";
@@ -8,41 +8,46 @@ import { Button } from "../components/button";
 import { Price } from "../components/price";
 
 export const CartScreen = () => {
-  const { productsInCart, subTotal, quantity, handleClearCart, handleQuantityAndSubTotal } = useContext(ProductContext);
+  const { productsInCart, subTotal, quantity, handleClearCart, handleQuantityAndSubTotal, isLoadingRemoveProduct, isLoadingQuantityAndSubTotal } = useContext(ProductContext);
 
+  const quantityVerify = quantity > 0;
   const nav = useNavigation();
 
   const handleHome = () => {
     nav.navigate("Home" as never);
   };
 
-  const quantityVerify = quantity > 0;
-
   return (
     <SafeAreaView style={styles.safe}>
       <StatusBar backgroundColor="#0E0F11" style="light" />
       <View style={styles.container}>
         <Text style={styles.cartTitle}>Carrinho</Text>
-        <FlatList
-          style={styles.cart}
-          data={productsInCart}
-          renderItem={({ item }) => (
-            <ProductInCart product={item} />
-          )}
-          ListEmptyComponent={<Text style={styles.emptyMessage}>Seu carrinho está vazio.</Text>}
-          ListFooterComponent={
-            quantityVerify ? <View style={styles.viewQuantity}>
-              <View style={styles.content}>
-                <Text style={styles.label}>SubTotal: </Text>
-                <Price price={subTotal} isDarkGray />
-              </View>
-              <View style={styles.content}>
-                <Text style={styles.label}>Quantidade: </Text>
-                <Text style={styles.value}>{quantity}</Text>
-              </View>
-            </View> : <></>
-          }
-        />
+        {isLoadingRemoveProduct || isLoadingQuantityAndSubTotal ? (
+          <ActivityIndicator size="large" color="#fff" />
+        ) : (
+          <FlatList
+            style={styles.cart}
+            data={productsInCart}
+            renderItem={({ item }) => <ProductInCart product={item} />}
+            ListEmptyComponent={<Text style={styles.emptyMessage}>Seu carrinho está vazio.</Text>}
+            ListFooterComponent={
+              quantityVerify ? (
+                <View style={styles.viewQuantity}>
+                  <View style={styles.content}>
+                    <Text style={styles.label}>SubTotal: </Text>
+                    <Price price={subTotal} isDarkGray />
+                  </View>
+                  <View style={styles.content}>
+                    <Text style={styles.label}>Quantidade: </Text>
+                    <Text style={styles.value}>{quantity}</Text>
+                  </View>
+                </View>
+              ) : (
+                <></>
+              )
+            }
+          />
+        )}
 
         <View style={styles.containerButtons}>
           {quantityVerify && (

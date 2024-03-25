@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { View, Text, StyleSheet, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, ActivityIndicator } from "react-native";
 import { ProductContext } from "../context/product.context";
 import { ProductDetailsProps, ProductDetailsScreenProps } from "../types/interfaces";
 import { Header } from "../components/header";
@@ -12,7 +12,7 @@ import { Button } from "../components/button";
 
 export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ route }) => {
   const { id } = route.params;
-  const { handleFindProductDetails, handleAddProductInCart, handleQuantityAndSubTotal } = useContext(ProductContext);
+  const { handleFindProductDetails, handleAddProductInCart, handleQuantityAndSubTotal, isLoadingAddProduct, isLoadingQuantityAndSubTotal } = useContext(ProductContext);
   const [productDetails, setProductDetails] = useState<ProductDetailsProps | null>(null);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ rout
           }}
           isBackgroundColor
         >
-          comprar
+          {isLoadingAddProduct || isLoadingQuantityAndSubTotal ? <ActivityIndicator size="small" color="#fff" /> : 'comprar'}
         </Button>
       </View>
     </SafeAreaView >

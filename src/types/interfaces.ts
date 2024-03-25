@@ -47,6 +47,9 @@ export interface ProductContextDataProps {
   handleFindProductDetails: (id: string) => Promise<ProductDetailsProps>;
   handleQuantityAndSubTotal: () => void;
   handleClearCart: () => void;
+  isLoadingAddProduct: boolean;
+  isLoadingRemoveProduct: boolean;
+  isLoadingQuantityAndSubTotal: boolean;
 };
 
 export interface ButtonProps {
