@@ -5,8 +5,13 @@ import { HomeScreen } from "./src/screens/home";
 import { ProductDetailsScreen } from "./src/screens/productDetails";
 import { Providers } from "./src/context";
 import { CartScreen } from "./src/screens/cart";
+import { Amplify } from "aws-amplify";
+import amplifyconfig from './src/amplifyconfiguration.json';
+import { withAuthenticator } from "@aws-amplify/ui-react-native";
 
 const Stack = createStackNavigator();
+
+Amplify.configure(amplifyconfig);
 
 const App = () => {
   return (
@@ -27,4 +32,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withAuthenticator(App);
