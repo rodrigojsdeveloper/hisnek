@@ -15,6 +15,8 @@ export const CartScreen = () => {
     nav.navigate("Home" as never);
   };
 
+  const quantityVerify = quantity > 0;
+
   return (
     <SafeAreaView style={styles.safe}>
       <StatusBar backgroundColor="#0E0F11" style="light" />
@@ -28,7 +30,7 @@ export const CartScreen = () => {
           )}
           ListEmptyComponent={<Text style={styles.emptyMessage}>Seu carrinho está vazio.</Text>}
           ListFooterComponent={
-            productsInCart.length > 0 ? <View style={styles.viewQuantity}>
+            quantityVerify ? <View style={styles.viewQuantity}>
               <View style={styles.content}>
                 <Text style={styles.label}>Subtotal: </Text>
                 <Text style={styles.value}>$ {subTotal}</Text>
@@ -42,12 +44,14 @@ export const CartScreen = () => {
         />
 
         <View style={styles.containerButtons}>
-          <Button onPress={() => {
-            handleClearCart()
-            handleQuantityAndSubTotal()
-          }}>
-            limpar carrinho
-          </Button>
+          {quantityVerify && (
+            <Button onPress={() => {
+              handleClearCart()
+              handleQuantityAndSubTotal()
+            }}>
+              limpar carrinho
+            </Button>
+          )}
           <Button onPress={handleHome} isBackgroundColor>
             retornar para a loja
           </Button>
