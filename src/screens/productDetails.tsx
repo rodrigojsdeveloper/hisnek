@@ -47,7 +47,7 @@ export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ rout
 
               <Description>{productDetails.description}</Description>
 
-              <Price>{productDetails.price}</Price>
+              <Price>{productDetails.price.toFixed(2).replace('.', ',')}</Price>
             </View>
           </View>
         </View>

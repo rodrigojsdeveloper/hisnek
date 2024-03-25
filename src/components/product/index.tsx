@@ -15,7 +15,7 @@ export const Product: React.FC<ProductProps> = ({ navigation, product }) => {
         <View style={styles.content}>
           <Title>{product.name}</Title>
 
-          <Price>{product.price}</Price>
+          <Price>{product.price.toFixed(2).replace('.', ',')}</Price>
         </View>
       </View>
     </TouchableOpacity>

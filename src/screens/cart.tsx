@@ -32,8 +32,8 @@ export const CartScreen = () => {
           ListFooterComponent={
             quantityVerify ? <View style={styles.viewQuantity}>
               <View style={styles.content}>
-                <Text style={styles.label}>Subtotal: </Text>
-                <Text style={styles.value}>$ {subTotal}</Text>
+                <Text style={styles.label}>SubTotal: </Text>
+                <Text style={styles.value}>R$ {subTotal.toFixed(2).replace('.', ',')}</Text>
               </View>
               <View style={styles.content}>
                 <Text style={styles.label}>Quantidade: </Text>

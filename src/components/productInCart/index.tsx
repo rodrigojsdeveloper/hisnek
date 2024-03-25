@@ -31,7 +31,7 @@ export const ProductInCart = ({ product }: ProductInCartProps) => {
 
       <View style={styles.content}>
         <Text style={styles.label}>Preço: </Text>
-        <Text style={styles.value}>$ {product.price}</Text>
+        <Text style={styles.value}>R$ {product.price.toFixed(2).replace('.', ',')}</Text>
       </View>
     </View>
   );
