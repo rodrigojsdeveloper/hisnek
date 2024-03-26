@@ -40,5 +40,11 @@ export const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: "500",
     color: "#fff",
-  }
+  },
+  contentIcons: {
+    flex: 1, 
+    flexDirection: "row", 
+    justifyContent: "flex-end", 
+    gap: 20,
+  },
 });

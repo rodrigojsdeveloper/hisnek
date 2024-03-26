@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     paddingVertical: 25,
     paddingHorizontal: 15,
     marginTop: 80,
+    gap: 30,
   },
   productDetails: {
     fontSize: 20,
