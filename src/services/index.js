@@ -107,11 +107,8 @@ const resolvers = {
   },
   Mutation: {
     addToCart: (parent, { product }) => {
-      const findProduct = productsInCart.find(p => p.id === product.id);
-      if (!findProduct) {
-        productsInCart.push(product);
-        return product;
-      };
+      productsInCart.push(product);
+      return product;
     },
     removeToCart: (parent, { id }) => {
       const index = productsInCart.findIndex(product => product.id === id);

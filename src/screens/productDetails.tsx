@@ -9,6 +9,7 @@ import { Description } from "../components/description";
 import { Price } from "../components/price";
 import { StatusBar } from "expo-status-bar";
 import { Button } from "../components/button";
+import { v4 as uuidv4 } from "uuid";
 
 export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ route }) => {
   const { id } = route.params;
@@ -54,7 +55,9 @@ export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ rout
 
         <Button
           onPress={() => {
-            handleAddProductInCart(productDetails);
+            const newId = uuidv4();
+            const updatedProductDetails = { ...productDetails, id: newId };
+            handleAddProductInCart(updatedProductDetails);
             handleQuantityAndSubTotal();
           }}
           isBackgroundColor

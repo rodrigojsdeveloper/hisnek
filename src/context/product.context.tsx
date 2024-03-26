@@ -97,10 +97,7 @@ export const ProductContextProvider = ({ children }: PropsWithChildren<{}>) => {
     try {
       const { data } = await axios.post(GRAPHQL_ENDPOINT, { query: addToCartMutation, variables: { product } });
       const addedProduct = data.data.addToCart;
-      const isProductInCart = productsInCart.some(p => p.id === addedProduct.id);
-      if (!isProductInCart) {
-        setProductsInCart([addedProduct, ...productsInCart]);
-      }
+      setProductsInCart([addedProduct, ...productsInCart]);
     } catch (error) {
       handleError("Erro ao adicionar produto ao carrinho:", error);
     } finally {

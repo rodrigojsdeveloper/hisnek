@@ -10,7 +10,6 @@ import { Price } from "../components/price";
 export const CartScreen = () => {
   const { productsInCart, subTotal, quantity, handleClearCart, handleQuantityAndSubTotal, isLoadingRemoveProduct, isLoadingQuantityAndSubTotal } = useContext(ProductContext);
 
-  const quantityVerify = quantity > 0;
   const nav = useNavigation();
 
   const handleHome = () => {
@@ -31,15 +30,15 @@ export const CartScreen = () => {
             renderItem={({ item }) => <ProductInCart product={item} />}
             ListEmptyComponent={<Text style={styles.emptyMessage}>Seu carrinho está vazio.</Text>}
             ListFooterComponent={
-              quantityVerify ? (
+              productsInCart.length > 0 ? (
                 <View style={styles.viewQuantity}>
-                  <View style={styles.content}>
-                    <Text style={styles.label}>SubTotal: </Text>
-                    <Price price={subTotal} isDarkGray />
-                  </View>
                   <View style={styles.content}>
                     <Text style={styles.label}>Quantidade: </Text>
                     <Text style={styles.value}>{quantity}</Text>
+                  </View>
+                  <View style={styles.content}>
+                    <Text style={styles.label}>SubTotal: </Text>
+                    <Price price={subTotal} isDarkGray />
                   </View>
                 </View>
               ) : (
@@ -50,10 +49,10 @@ export const CartScreen = () => {
         )}
 
         <View style={styles.containerButtons}>
-          {quantityVerify && (
+          {productsInCart.length > 0 && (
             <Button onPress={() => {
-              handleClearCart()
-              handleQuantityAndSubTotal()
+              handleClearCart();
+              handleQuantityAndSubTotal();
             }}>
               limpar carrinho
             </Button>
