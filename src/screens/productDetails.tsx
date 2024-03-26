@@ -31,7 +31,7 @@ export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ rout
 
   if (!productDetails) {
     return null;
-  }
+  };
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -62,7 +62,7 @@ export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ rout
           }}
           isBackgroundColor
         >
-          {isLoadingAddProduct || isLoadingQuantityAndSubTotal ? <ActivityIndicator size="small" color="#fff" /> : 'comprar'}
+          {isLoadingAddProduct || isLoadingQuantityAndSubTotal ? <ActivityIndicator size="small" color="#fff" /> : "comprar"}
         </Button>
       </View>
     </SafeAreaView >

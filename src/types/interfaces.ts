@@ -60,4 +60,4 @@ export interface ButtonProps {
 export interface PriceProps {
   price: number;
   isDarkGray?: boolean;
-}
+};
