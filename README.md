@@ -75,6 +75,15 @@ amplify push
 # Certifique-se de seguir esses passos para configurar com sucesso o AWS Amplify.
 ```
 
+## Configuração do .env
+
+Crie um arquivo `.env.local` com base no arquivo `.env.example`.
+
+### Para acessar o endereço IPv4:
+
+- Abra as configurações de rede.
+- Procure pela seção de detalhes da conexão ou configurações de rede, onde você encontrará o endereço IPv4 listado.
+
 ## Iniciando o Teste
 
 Para iniciar a fake-api, execute o seguinte comando no terminal:
