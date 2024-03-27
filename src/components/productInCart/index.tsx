@@ -14,7 +14,7 @@ export const ProductInCart = ({ product }: ProductInCartProps) => {
     <View style={styles.container}>
       <View style={styles.content}>
         <Image style={styles.image} source={{ uri: product.img }} />
-        <TouchableOpacity onPress={() => {
+        <TouchableOpacity style={styles.buttonClose} onPress={() => {
           handleRemoveProductInCart(product.id);
           handleQuantityAndSubTotal();
         }}>

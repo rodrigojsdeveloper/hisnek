@@ -12,6 +12,9 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  buttonClose: {
+    height: 18,
+  },
   image: {
     width: 70,
     height: 70,
