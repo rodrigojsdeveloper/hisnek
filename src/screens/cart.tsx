@@ -50,10 +50,13 @@ export const CartScreen = () => {
 
         <View style={styles.containerButtons}>
           {productsInCart.length > 0 && (
-            <Button onPress={() => {
-              handleClearCart();
-              handleQuantityAndSubTotal();
-            }}>
+            <Button 
+              onPress={() => {
+                handleClearCart();
+                handleQuantityAndSubTotal();
+              }}
+              disabled={isLoadingRemoveProduct || isLoadingQuantityAndSubTotal}
+            >
               limpar carrinho
             </Button>
           )}

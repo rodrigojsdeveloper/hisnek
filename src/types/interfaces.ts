@@ -55,6 +55,7 @@ export interface ProductContextDataProps {
 export interface ButtonProps {
   isBackgroundColor?: boolean;
   onPress?: (((event: GestureResponderEvent) => void) & (() => void));
+  disabled?: boolean;
 };
 
 export interface PriceProps {

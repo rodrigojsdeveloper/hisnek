@@ -61,6 +61,7 @@ export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ rout
             handleQuantityAndSubTotal();
           }}
           isBackgroundColor
+          disabled={isLoadingAddProduct || isLoadingQuantityAndSubTotal}
         >
           {isLoadingAddProduct || isLoadingQuantityAndSubTotal ? <ActivityIndicator size="small" color="#fff" /> : "comprar"}
         </Button>
