@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const ProductContext = createContext({} as ProductContextDataProps);
 
-const GRAPHQL_ENDPOINT = "http://10.0.0.132:4000/graphql";
+const GRAPHQL_ENDPOINT = `http://${process.env.IPV4_ADDRESS}:4000/graphql`;
 
 const getProductQuery = `
   query {
