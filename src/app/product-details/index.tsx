@@ -1,15 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, SafeAreaView, ActivityIndicator } from "react-native";
-import { ProductContext } from "../context/product.context";
-import { ProductDetailsProps, ProductDetailsScreenProps } from "../types/interfaces";
-import { Header } from "../components/header";
-import { ImageProduct } from "../components/imageProduct";
-import { Title } from "../components/title";
-import { Description } from "../components/description";
-import { Price } from "../components/price";
+import { ProductContext } from "@/context/product.context";
+import { ProductDetailsProps, ProductDetailsScreenProps } from "@/types/interfaces";
+import { Header } from "@/components/header";
+import { ImageProduct } from "@/components/imageProduct";
+import { Title } from "@/components/title";
+import { Description } from "@/components/description";
+import { Price } from "@/components/price";
 import { StatusBar } from "expo-status-bar";
-import { Button } from "../components/button";
+import { Button } from "@/components/button";
 import { v4 as uuidv4 } from "uuid";
+import { theme } from "@/theme";
 
 export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ route }) => {
   const { id } = route.params;
@@ -63,7 +64,7 @@ export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ rout
           isBackgroundColor
           disabled={isLoading.addProduct || isLoading.quantityAndSubTotal}
         >
-          {isLoading.addProduct || isLoading.quantityAndSubTotal ? <ActivityIndicator size="small" color="#fff" /> : "comprar"}
+          {isLoading.addProduct || isLoading.quantityAndSubTotal ? <ActivityIndicator size="small" color={theme.colors.white} /> : "comprar"}
         </Button>
       </View>
     </SafeAreaView >
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
   safe: {
     flex: 1,
     backgroundColor: "#0E0F11",
-    color: "#fff",
+    color: theme.colors.white,
   },
   container: {
     flex: 1,
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600",
     lineHeight: 24,
-    color: "#fff",
+    color: theme.colors.white,
   },
   gap25: {
     gap: 25,

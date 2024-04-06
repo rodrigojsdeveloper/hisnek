@@ -6,6 +6,7 @@ import { ProductContext } from "../../context/product.context";
 import { Price } from "../price";
 
 import { styles } from "./style";
+import { theme } from "@/theme";
 
 export const ProductInCart = ({ product }: ProductInCartProps) => {
   const { handleRemoveProductInCart, handleQuantityAndSubTotal } = useContext(ProductContext);
@@ -18,7 +19,7 @@ export const ProductInCart = ({ product }: ProductInCartProps) => {
           handleRemoveProductInCart(product.id);
           handleQuantityAndSubTotal();
         }}>
-          <Svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <Svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke={theme.colors.white} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
             <Path d="M18 6 6 18" />
             <Path d="m6 6 12 12" />
           </Svg>

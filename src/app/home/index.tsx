@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { FlatList, SafeAreaView, StyleSheet, View } from "react-native";
-import { Product } from "../components/product";
-import { Header } from "../components/header";
-import { ProductContext } from "../context/product.context";
-import { HomeScreenProps } from "../types/interfaces";
+import { Product } from "@/components/product";
+import { Header } from "@/components/header";
+import { ProductContext } from "@/context/product.context";
+import { HomeScreenProps } from "@/types/interfaces";
 import { StatusBar } from "expo-status-bar";
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {

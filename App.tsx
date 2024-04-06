@@ -2,7 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator, TransitionPresets } from "@react-navigation/stack";
 import { HomeScreen } from "@/app/home";
-import { ProductDetailsScreen } from "@/app/productDetails";
+import { ProductDetailsScreen } from "@/app/product-details";
 import { Providers } from "@/context";
 import { CartScreen } from "@/app/cart";
 import { Amplify } from "aws-amplify";

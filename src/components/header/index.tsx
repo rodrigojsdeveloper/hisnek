@@ -8,6 +8,7 @@ import { HeaderProps } from "../../types/interfaces";
 import { signOut } from "aws-amplify/auth";
 
 import { styles } from "./style";
+import { theme } from "@/theme";
 
 export const Header = ({ goBack }: HeaderProps) => {
   const { quantity } = useContext(ProductContext);
@@ -34,7 +35,7 @@ export const Header = ({ goBack }: HeaderProps) => {
       {
         goBack ? (
           <TouchableOpacity onPress={handleGoBack}>
-            <Svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
+            <Svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={theme.colors.white} strokeWidth="2">
               <Path d="m12 19-7-7 7-7" />
               <Path d="M19 12H5" />
             </Svg>
@@ -53,7 +54,7 @@ export const Header = ({ goBack }: HeaderProps) => {
               </View>
             )
           }
-          <Svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <Svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={theme.colors.white} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <Circle cx="8" cy="21" r="1" />
             <Circle cx="19" cy="21" r="1" />
             <Path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />

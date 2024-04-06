@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import { FlatList, SafeAreaView, StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { ProductContext } from "../context/product.context";
-import { ProductInCart } from "../components/productInCart";
+import { ProductContext } from "@/context/product.context";
+import { ProductInCart } from "@/components/productInCart";
 import { StatusBar } from "expo-status-bar";
-import { Button } from "../components/button";
-import { Price } from "../components/price";
+import { Button } from "@/components/button";
+import { Price } from "@/components/price";
+import { theme } from "@/theme";
 
 export const CartScreen = () => {
   const { productsInCart, subTotal, quantity, handleClearCart, handleQuantityAndSubTotal, isLoading } = useContext(ProductContext);
@@ -22,7 +23,7 @@ export const CartScreen = () => {
       <View style={styles.container}>
         <Text style={styles.cartTitle}>Carrinho</Text>
         {isLoading.removeProduct || isLoading.quantityAndSubTotal ? (
-          <ActivityIndicator size="large" color="#fff" />
+          <ActivityIndicator size="large" color={theme.colors.white} />
         ) : (
           <FlatList
             style={styles.cart}
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
   safe: {
     flex: 1,
     backgroundColor: "#0E0F11",
-    color: "#fff",
+    color: theme.colors.white,
   },
   container: {
     flex: 1,
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600",
     lineHeight: 24,
-    color: "#fff",
+    color: theme.colors.white,
     textAlign: "center",
   },
   cart: {
@@ -95,14 +96,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#202224",
     borderTopWidth: 1,
     borderStyle: "solid",
-    borderColor: "#fff",
+    borderColor: theme.colors.white,
   },
   emptyMessage: {
     fontSize: 14,
     fontWeight: "500",
     lineHeight: 18,
     textAlign: "center",
-    color: "#fff",
+    color: theme.colors.white,
     padding: 15,
   },
   viewQuantity: {
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "600",
     lineHeight: 20,
-    color: "#fff",
+    color: theme.colors.white,
   },
   value: {
     fontSize: 12,

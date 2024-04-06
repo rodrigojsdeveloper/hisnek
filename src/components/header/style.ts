@@ -1,3 +1,4 @@
+import { theme } from "@/theme";
 import { StyleSheet, Dimensions } from "react-native";
 
 const { width } = Dimensions.get("window");
@@ -39,7 +40,7 @@ export const styles = StyleSheet.create({
   textQuantity: {
     fontSize: 10,
     fontWeight: "500",
-    color: "#fff",
+    color: theme.colors.white,
   },
   contentIcons: {
     flex: 1, 

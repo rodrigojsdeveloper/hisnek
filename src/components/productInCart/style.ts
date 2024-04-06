@@ -1,3 +1,4 @@
+import { theme } from "@/theme";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -5,7 +6,7 @@ export const styles = StyleSheet.create({
     gap: 10,
     borderBottomWidth: 1,
     borderStyle: "solid",
-    borderColor: "#fff",
+    borderColor: theme.colors.white,
     padding: 20,
   },
   content: {
@@ -24,7 +25,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     lineHeight: 20,
-    color: "#FFF",
+    color: theme.colors.white,
   },
   value: {
     fontSize: 12,
