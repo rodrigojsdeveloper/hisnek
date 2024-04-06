@@ -8,7 +8,7 @@ import { Button } from "../components/button";
 import { Price } from "../components/price";
 
 export const CartScreen = () => {
-  const { productsInCart, subTotal, quantity, handleClearCart, handleQuantityAndSubTotal, isLoadingRemoveProduct, isLoadingQuantityAndSubTotal } = useContext(ProductContext);
+  const { productsInCart, subTotal, quantity, handleClearCart, handleQuantityAndSubTotal, isLoading } = useContext(ProductContext);
 
   const nav = useNavigation();
 
@@ -21,7 +21,7 @@ export const CartScreen = () => {
       <StatusBar backgroundColor="#0E0F11" style="light" />
       <View style={styles.container}>
         <Text style={styles.cartTitle}>Carrinho</Text>
-        {isLoadingRemoveProduct || isLoadingQuantityAndSubTotal ? (
+        {isLoading.removeProduct || isLoading.quantityAndSubTotal ? (
           <ActivityIndicator size="large" color="#fff" />
         ) : (
           <FlatList
@@ -50,12 +50,12 @@ export const CartScreen = () => {
 
         <View style={styles.containerButtons}>
           {productsInCart.length > 0 && (
-            <Button 
+            <Button
               onPress={() => {
                 handleClearCart();
                 handleQuantityAndSubTotal();
               }}
-              disabled={isLoadingRemoveProduct || isLoadingQuantityAndSubTotal}
+              disabled={isLoading.removeProduct || isLoading.quantityAndSubTotal}
             >
               limpar carrinho
             </Button>

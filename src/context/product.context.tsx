@@ -82,9 +82,15 @@ export const ProductContextProvider = ({ children }: PropsWithChildren<{}>) => {
   const [productsInCart, setProductsInCart] = useState<ProductDetailsProps[]>([]);
   const [quantity, setQuantity] = useState<number>(0);
   const [subTotal, setSubTotal] = useState<number>(0);
-  const [isLoadingAddProduct, setIsLoadingAddProduct] = useState<boolean>(false);
-  const [isLoadingRemoveProduct, setIsLoadingRemoveProduct] = useState<boolean>(false);
-  const [isLoadingQuantityAndSubTotal, setIsLoadingQuantityAndSubTotal] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<{
+    addProduct?: boolean,
+    removeProduct?: boolean,
+    quantityAndSubTotal?: boolean
+  }>({
+    addProduct: false,
+    removeProduct: false,
+    quantityAndSubTotal: false,
+  });
 
   const fetchProducts = async () => {
     const { data } = await fetchData(getProductQuery);
@@ -92,7 +98,7 @@ export const ProductContextProvider = ({ children }: PropsWithChildren<{}>) => {
   };
 
   const handleAddProductInCart = async (product: ProductDetailsProps) => {
-    setIsLoadingAddProduct(true);
+    setIsLoading({ addProduct: true });
 
     try {
       const { data } = await axios.post(GRAPHQL_ENDPOINT, { query: addToCartMutation, variables: { product } });
@@ -101,12 +107,12 @@ export const ProductContextProvider = ({ children }: PropsWithChildren<{}>) => {
     } catch (error) {
       handleError("Erro ao adicionar produto ao carrinho:", error);
     } finally {
-      setIsLoadingAddProduct(false);
+      setIsLoading({ addProduct: false });
     }
   };
 
   const handleRemoveProductInCart = async (id: string) => {
-    setIsLoadingRemoveProduct(true);
+    setIsLoading({ removeProduct: true });
 
     try {
       await axios.post(GRAPHQL_ENDPOINT, { query: removeToCartMutation, variables: { id } });
@@ -115,7 +121,7 @@ export const ProductContextProvider = ({ children }: PropsWithChildren<{}>) => {
     } catch (error) {
       console.error("Erro ao remover produto do carrinho:", error);
     } finally {
-      setIsLoadingRemoveProduct(false);
+      setIsLoading({ removeProduct: false });
     }
   };
 
@@ -134,7 +140,7 @@ export const ProductContextProvider = ({ children }: PropsWithChildren<{}>) => {
   };
 
   const handleQuantityAndSubTotal = async () => {
-    setIsLoadingQuantityAndSubTotal(true);
+    setIsLoading({ quantityAndSubTotal: true });
 
     try {
       const { data } = await fetchData(quantityAndSubTotal);
@@ -144,12 +150,12 @@ export const ProductContextProvider = ({ children }: PropsWithChildren<{}>) => {
       handleError("Erro ao encontrar detalhes do produto:", error);
       throw error;
     } finally {
-      setIsLoadingQuantityAndSubTotal(false);
+      setIsLoading({ quantityAndSubTotal: false });
     }
   };
 
   const handleClearCart = async () => {
-    setIsLoadingRemoveProduct(true);
+    setIsLoading({ removeProduct: true });
 
     try {
       const { data } = await fetchData(clearCart);
@@ -158,7 +164,7 @@ export const ProductContextProvider = ({ children }: PropsWithChildren<{}>) => {
       handleError("Erro ao limpar carrinho de compras:", error);
       throw error;
     } finally {
-      setIsLoadingRemoveProduct(false);
+      setIsLoading({ removeProduct: false });
     }
   };
 
@@ -176,9 +182,7 @@ export const ProductContextProvider = ({ children }: PropsWithChildren<{}>) => {
     handleFindProductDetails,
     handleQuantityAndSubTotal,
     handleClearCart,
-    isLoadingAddProduct,
-    isLoadingRemoveProduct,
-    isLoadingQuantityAndSubTotal
+    isLoading,
   };
 
   return <ProductContext.Provider value={ProductContextData}>{children}</ProductContext.Provider>;

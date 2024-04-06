@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ route }) => {
   const { id } = route.params;
-  const { handleFindProductDetails, handleAddProductInCart, handleQuantityAndSubTotal, isLoadingAddProduct, isLoadingQuantityAndSubTotal } = useContext(ProductContext);
+  const { handleFindProductDetails, handleAddProductInCart, handleQuantityAndSubTotal, isLoading } = useContext(ProductContext);
   const [productDetails, setProductDetails] = useState<ProductDetailsProps | null>(null);
 
   useEffect(() => {
@@ -61,9 +61,9 @@ export const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ rout
             handleQuantityAndSubTotal();
           }}
           isBackgroundColor
-          disabled={isLoadingAddProduct || isLoadingQuantityAndSubTotal}
+          disabled={isLoading.addProduct || isLoading.quantityAndSubTotal}
         >
-          {isLoadingAddProduct || isLoadingQuantityAndSubTotal ? <ActivityIndicator size="small" color="#fff" /> : "comprar"}
+          {isLoading.addProduct || isLoading.quantityAndSubTotal ? <ActivityIndicator size="small" color="#fff" /> : "comprar"}
         </Button>
       </View>
     </SafeAreaView >
